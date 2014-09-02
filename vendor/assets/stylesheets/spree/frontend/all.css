@@ -10,3 +10,8 @@
  *= require_tree .
  *= require spree/fancy
 */
+
+
+p.bold {
+  font-weight: bold;
+}
