@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  spree:
+    new_provider: New Provider
+  activerecord:
+    models:
+      spree/provider:
+        one: Provider
+        other: Providers

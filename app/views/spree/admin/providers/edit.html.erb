@@ -1,0 +1,18 @@
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_provider) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back_to_providers_list), admin_providers_url, :icon => 'arrow-left'%></li>
+<% end %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @provider } %>
+
+<%= form_for [:admin, @provider] do |f| %>
+  <fieldset class="no-border-top">
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

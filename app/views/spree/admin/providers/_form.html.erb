@@ -1,0 +1,23 @@
+<div data-hook="admin_provider_form" class="align-center row">
+  <div class="alpha eight columns">
+    <%= f.field_container :name do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
+      <%= f.text_field :name, :class => 'fullwidth' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+  </div>
+  <div class="alpha eight columns">
+    <%= f.field_container :tel do %>
+      <%= f.label :tel, Spree.t(:tel) %> <span class="required">*</span><br />
+      <%= f.text_field :tel, :class => 'fullwidth' %>
+      <%= f.error_message_on :tel %>
+    <% end %>
+  </div>
+  <div class="alpha eight columns">
+    <%= f.field_container :address do %>
+      <%= f.label :address, Spree.t(:address) %><br />
+      <%= f.text_field :address, :class => 'fullwidth' %>
+      <%= f.error_message_on :address %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:providers) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <li id="new_provider_link">
+    <%= button_link_to Spree.t(:new_provider), new_admin_provider_url, { :remote => true, :icon => 'plus', 'data-update' => 'new_provider', :id => 'new_provider_link' } %>
+  </li>
+<% end %>
+
+<%= render 'spree/admin/shared/product_sub_menu' %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_provider_sidebar">
+    <%= search_form_for [:admin, @search] do |f| %>
+      <%- locals = {:f => f} %>
+      <div data-hook="admin_provider_index_search">
+        <div class="alpha eight columns">
+          <div class="field">
+            <%= f.label :name_cont, Spree.t(:name) %>
+            <%= f.text_field :name_cont, :size => 15 %>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div class="form-buttons actions filter-actions" data-hook="admin_provider_index_search_buttons">
+        <%= button Spree.t(:search), 'search' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div id="new_provider"></div>
+
+<% if @providers.any? %>
+  <table class="index" id='listing_providers' data-hook>
+    <colgroup>
+      <col style="width: 35%">
+      <col style="width: 15%">
+      <col style="width: 35%">
+      <col style="width: 15%">
+    </colgroup>
+    <thead>
+      <tr data-hook="listing_providers_header">
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:tel) %></th>
+        <th><%= Spree.t(:address) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @providers.each do |provider| %>
+        <tr id="<%= spree_dom_id provider %>" data-hook="listing_providers_row" class="<%= cycle('odd', 'even')%>">
+          <td style="padding-left:1em"><%= provider.name %></td>
+          <td style="padding-left:1em"><%= provider.tel %></td>
+          <td style="padding-left:1em"><%= provider.address %></td>
+          <td class="actions">
+            <%= link_to_edit(provider, :no_text => true) %>
+            <%= link_to_delete(provider, :no_text => true) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/provider')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_provider_path %>!
+  </div>
+<% end %>
+
+<%= paginate @collection %>

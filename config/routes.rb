@@ -2,6 +2,12 @@ Store15::Application.routes.draw do
 
   mount Spree::Core::Engine, :at => '/'
 
+  Spree::Core::Engine.routes.prepend do
+    namespace :admin do
+      resources :providers
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
