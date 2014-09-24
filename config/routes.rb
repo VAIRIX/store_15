@@ -58,7 +58,7 @@ Store15::Application.routes.draw do
   #   end
 end
 
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.routes do
   namespace :admin do
     resources :providers
   end

@@ -24,6 +24,14 @@ gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-3-stable'
 
 gem 'spree_fancy', :git => 'git://github.com/spree/spree_fancy.git'
 
+gem 'spree_recently_viewed', github: 'spree/spree_recently_viewed', branch: '2-3-stable'
+
+gem 'spree_social', github: 'spree/spree_social', branch: '2-3-stable'
+
+gem "spree_comments", github: 'spree/spree_comments', branch: '2-3-stable'
+
+gem 'spree_related_products', github: 'spree/spree_related_products', branch: '2-3-stable'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -48,4 +56,10 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+group :development do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'debugger'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+end

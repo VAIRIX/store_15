@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904212306) do
+ActiveRecord::Schema.define(version: 20140924183845) do
 
   create_table "spree_addresses", force: true do |t|
     t.string   "firstname"
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 20140904212306) do
   add_index "spree_assets", ["viewable_id"], name: "index_assets_on_viewable_id"
   add_index "spree_assets", ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
 
+  create_table "spree_authentication_methods", force: true do |t|
+    t.string   "environment"
+    t.string   "provider"
+    t.string   "api_key"
+    t.string   "api_secret"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "spree_calculators", force: true do |t|
     t.string   "type"
     t.integer  "calculable_id"
@@ -87,6 +97,28 @@ ActiveRecord::Schema.define(version: 20140904212306) do
 
   add_index "spree_calculators", ["calculable_id", "calculable_type"], name: "index_spree_calculators_on_calculable_id_and_calculable_type"
   add_index "spree_calculators", ["id", "type"], name: "index_spree_calculators_on_id_and_type"
+
+  create_table "spree_comment_types", force: true do |t|
+    t.string   "name"
+    t.string   "applies_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_comments", force: true do |t|
+    t.string   "title",            limit: 50
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "comment_type_id"
+  end
+
+  add_index "spree_comments", ["commentable_id"], name: "index_spree_comments_on_commentable_id"
+  add_index "spree_comments", ["commentable_type"], name: "index_spree_comments_on_commentable_type"
+  add_index "spree_comments", ["user_id"], name: "index_spree_comments_on_user_id"
 
   create_table "spree_configurations", force: true do |t|
     t.string   "name"
@@ -500,6 +532,26 @@ ActiveRecord::Schema.define(version: 20140904212306) do
     t.datetime "updated_at"
   end
 
+  create_table "spree_relation_types", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "applies_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_relations", force: true do |t|
+    t.integer  "relation_type_id"
+    t.integer  "relatable_id"
+    t.string   "relatable_type"
+    t.integer  "related_to_id"
+    t.string   "related_to_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "discount_amount",  precision: 8, scale: 2, default: 0.0
+    t.integer  "position"
+  end
+
   create_table "spree_return_authorizations", force: true do |t|
     t.string   "number"
     t.string   "state"
@@ -789,6 +841,14 @@ ActiveRecord::Schema.define(version: 20140904212306) do
   end
 
   add_index "spree_trackers", ["active"], name: "index_spree_trackers_on_active"
+
+  create_table "spree_user_authentications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spree_users", force: true do |t|
     t.string   "encrypted_password",     limit: 128
