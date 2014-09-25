@@ -32,6 +32,8 @@ gem "spree_comments", github: 'spree/spree_comments', branch: '2-3-stable'
 
 gem 'spree_related_products', github: 'spree/spree_related_products', branch: '2-3-stable'
 
+gem 'spree_i18n', github: 'spree/spree_i18n', branch: '2-3-stable'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 

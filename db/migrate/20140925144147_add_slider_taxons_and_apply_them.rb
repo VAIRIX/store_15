@@ -7,8 +7,8 @@ class AddSliderTaxonsAndApplyThem < ActiveRecord::Migration
     latest    = Spree::Taxon.create({:taxonomy_id => tags.id, :parent_id => tags.root.id, :name => 'Latest'})
 
     products = Spree::Product.all
-    
-    if products[6] 
+
+    if products[6]
       products[0..6].each do |product|
         product.taxons << slider
       end
@@ -18,7 +18,7 @@ class AddSliderTaxonsAndApplyThem < ActiveRecord::Migration
       products[4..15].each do |product|
         product.taxons << featured
       end
- 
+
       products[0..12].each do |product|
         product.taxons << latest
       end
